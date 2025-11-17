@@ -159,7 +159,9 @@ dvc stage add -n evaluate \
 ```
 
 <!-- ============================================== -->
-<!--            🤝 Contributing                     -->
+<!--                                -->
 <!-- ============================================== -->
+
+<h2 align="center">🤝 Contributing </h2>
 
 Feel free to open issues or submit pull requests—contributions are greatly appreciated!
