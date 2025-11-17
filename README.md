@@ -158,22 +158,4 @@ dvc stage add -n evaluate \
     python src/evaluate.py
 ```
 
-<!-- ====================== ⚙️ MLflow Configuration ====================== -->
 
-## ⚙️ Configure MLflow (DagsHub Integration)
-
-MLflow is configured to log metrics, models, and artifacts directly to **DagsHub’s hosted MLflow server**.
-
-Add the following code snippet at the **top** of both:  
-`src/train.py` and `src/evaluate.py`
-
-```python
-import os
-
-# ====================================================
-# 🔧 MLFLOW + DAGSHUB CONFIGURATION
-# ====================================================
-os.environ["MLFLOW_TRACKING_URI"] = "https://dagshub.com/<your-username>/<your-repo>.mlflow"
-os.environ["MLFLOW_TRACKING_USERNAME"] = "<your-username>"
-os.environ["MLFLOW_TRACKING_PASSWORD"] = "<your-access-token>"
-# ====================================================
