@@ -17,30 +17,17 @@
 
 ---
 
-## 🎨 Overview
+## 📝 Project Summary
 
-Welcome to a fully reproducible **Machine Learning Pipeline** integrating real-world **MLOps tools**:
+This project demonstrates how to build a complete **end-to-end Machine Learning pipeline** using:
 
-         ┌───────────────────────────┐
-         │     Data Preprocessing     │
-         └─────────────┬─────────────┘
-                       ▼
-         ┌───────────────────────────┐
-         │     Model Training         │
-         │  (Hyperparameter Tuning)   │
-         └─────────────┬─────────────┘
-                       ▼
-         ┌───────────────────────────┐
-         │       Evaluation           │
-         └───────────────────────────┘
+- **DVC** → Dataset & model versioning  
+- **MLflow** → Experiment tracking  
+- **DagsHub** → Remote storage + hosted MLflow  
+- **Scikit-learn** → RandomForest Classifier  
+- **Git** → Code version control  
 
-🔹 **DVC** handles dataset + model versioning  
-🔹 **MLflow** reports metrics, params, artifacts  
-🔹 **DagsHub** integrates remote data + experiment UI  
-🔹 **Scikit-learn** provides the ML model  
-🔹 **Git** manages code versioning  
-
-Clean. Reproducible. Collaborative.
+The pipeline trains a **Random Forest Classifier** on the **Pima Indians Diabetes Dataset** with clear modular stages:
 
 ---
 
