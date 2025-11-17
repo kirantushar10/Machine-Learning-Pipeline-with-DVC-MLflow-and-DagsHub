@@ -1,3 +1,3 @@
 ['remote "origin"']
     url = s3://dvc
-    endpointurl = 
+    endpointurl = ""
