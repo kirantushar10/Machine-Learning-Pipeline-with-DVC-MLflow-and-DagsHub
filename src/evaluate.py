@@ -19,7 +19,7 @@ def evaluate(data_path,model_path):
     X=data.drop(columns=["Outcome"])
     y=data["Outcome"]
 
-    mlflow.set_tracking_uri("https://dagshub.com/kirantushar10/MachineLearningPipeline.mlflow")
+    mlflow.set_tracking_uri("https://dagshub.com/<username>/<repo>.mlflow"")
 
     ## LOAD THE MODEL FROM THE DISK
 
