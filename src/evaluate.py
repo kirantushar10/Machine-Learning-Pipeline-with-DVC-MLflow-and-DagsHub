@@ -5,9 +5,9 @@ import yaml
 from sklearn.metrics import accuracy_score
 import os
 
-os.environ['MLFLOW_TRACKING_URI'] = "https://dagshub.com/kirantushar10/MachineLearningPipeline.mlflow"
-os.environ['MLFLOW_TRACKING_USERNAME'] = "kirantushar10"
-os.environ['MLFLOW_TRACKING_PASSWORD'] = "a6a098b1c426bb934bc0dda1759164bb1136d7b0"
+os.environ['MLFLOW_TRACKING_URI'] = "https://dagshub.com/<username>/<repo>.mlflow"
+os.environ['MLFLOW_TRACKING_USERNAME'] = "<your-username>"
+os.environ['MLFLOW_TRACKING_PASSWORD'] = "<your-token>"
 
 ## LOAD PARAMETERS FROM YAML
 
