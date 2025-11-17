@@ -10,9 +10,9 @@ import os
 from sklearn.model_selection import train_test_split, GridSearchCV
 from urllib.parse import urlparse
 
-os.environ['MLFLOW_TRACKING_URI'] = "https://dagshub.com/kirantushar10/MachineLearningPipeline.mlflow"
-os.environ['MLFLOW_TRACKING_USERNAME'] = "kirantushar10"
-os.environ['MLFLOW_TRACKING_PASSWORD'] = "a6a098b1c426bb934bc0dda1759164bb1136d7b0"
+os.environ['MLFLOW_TRACKING_URI'] = "https://dagshub.com/<username>/<repo>.mlflow"
+os.environ['MLFLOW_TRACKING_USERNAME'] = "<your-username>"
+os.environ['MLFLOW_TRACKING_PASSWORD'] = "<your-token>"
 
 def hyperparameter_tuning(X_train,y_train,param_grid):
     rf = RandomForestClassifier()
@@ -29,7 +29,7 @@ def train(data_path,model_path,random_state,n_estimators,max_depth):
     X=data.drop(columns=["Outcome"])
     y=data["Outcome"]
 
-    mlflow.set_tracking_uri("https://dagshub.com/kirantushar10/MachineLearningPipeline.mlflow")
+    mlflow.set_tracking_uri("https://dagshub.com/<username>/<repo>.mlflow")
 
     ## START THE MLFLOW RUN
 
