@@ -17,38 +17,151 @@
 
 ---
 
-## 📝 Project Summary
+<!-- ============================================== -->
+<!--                PROJECT SUMMARY                 -->
+<!-- ============================================== -->
 
-This project implements a fully reproducible **⚙️ Machine Learning Pipeline** using  
-**📦 DVC**, **📘 MLflow**, **☁️ DagsHub**, and **🐍 Python** to train a  
-**🌲 Random Forest Classifier** on the **🩺 Pima Indians Diabetes dataset**.
+<h2 align="center">📝 Project Summary</h2>
 
-It follows a real MLOps workflow with clearly separated, version-controlled stages:
+<p align="center">
+This project delivers a complete <b>MLOps-driven Machine Learning Pipeline</b> using
+<b>📦 DVC</b>, <b>📘 MLflow</b>, <b>☁️ DagsHub</b>, and <b>🐍 Python</b>.
+It trains a <b>🌲 Random Forest Classifier</b> on the
+<b>🩺 Pima Indians Diabetes Dataset</b> with reproducible, version-controlled stages.
+</p>
 
 ---
 
-# 📐 Pipeline Architecture (ASCII Graphic)
+<h2 align="center">🔹 🧹 Preprocessing Stage 🔹</h2>
 
-┌─────────────────────────────────────────────────────┐
-│ 📥 RAW DATA │
-└───────────────▲─────────────────────────────────────┘
-│
-│ 1️⃣ Preprocessing (DVC Stage)
-│
-┌───────────────┴─────────────────────────────────────┐
-│ 🧹 CLEAN / PROCESSED DATA │
-└───────────────▲─────────────────────────────────────┘
-│
-│ 2️⃣ Training (MLflow + DVC Stage)
-│
-┌───────────────┴─────────────────────────────────────┐
-│ 🤖 TRAINED MODEL │
-│ (versioned using DVC, logged using MLflow) │
-└───────────────▲─────────────────────────────────────┘
-│
-│ 3️⃣ Evaluation (MLflow Stage)
-│
-┌───────────────┴─────────────────────────────────────┐
-│ 📊 METRICS & REPORTS │
-│ (Accuracy, Confusion Matrix, Classification Report) │
-└──────────────────────────────────────────────────────┘
+📄 **Script:** `src/preprocess.py`  
+📦 **Versioned Using:** DVC  
+💾 **Output:** `data/processed/data.csv`
+
+### ✨ What This Stage Does:
+- Loads raw CSV from `data/raw/`
+- Cleans, formats & structures data
+- Produces fully reproducible processed data
+
+> 🔵 **Colorized Callout:**  
+> *Consistent preprocessing ensures that model results are always reproducible — no “it worked on my machine” issues.*
+
+---
+
+<h2 align="center">🔹 🤖 Training Stage 🔹</h2>
+
+📄 **Script:** `src/train.py`  
+📘 **Tracked using:** MLflow  
+📦 **Model Versioning:** DVC  
+🧠 **Algorithm:** Random Forest Classifier  
+
+### ✨ What This Stage Does:
+- Trains Random Forest model  
+- Performs Grid Search hyperparameter tuning  
+- Logs everything to MLflow:
+  - 📈 Accuracy  
+  - ⚙️ Hyperparameters  
+  - 📊 Confusion Matrix  
+  - 🧾 Classification Report  
+  - 📦 Trained Model Artifact  
+
+> 🟢 **Colorized Callout:**  
+> MLflow makes every experiment comparable. No more spreadsheets, screenshots, or forgotten parameters.
+
+---
+
+<h2 align="center">🔹 📊 Evaluation Stage 🔹</h2>
+
+📄 **Script:** `src/evaluate.py`  
+📘 **Tracked using:** MLflow  
+
+### ✨ What This Stage Does:
+- Loads trained model  
+- Computes predictions  
+- Logs evaluation metrics  
+- Creates evaluation artifacts for comparison  
+
+> 🟣 **Colorized Callout:**  
+> Keeps the evaluation transparent, repeatable, and fully trackable across model versions.
+
+---
+
+<!-- ============================================== -->
+<!--                  WHY THIS PIPELINE             -->
+<!-- ============================================== -->
+
+<h2 align="center">🎯 Why This Pipeline?</h2>
+
+### ✔ 🔁 **Reproducibility**  
+DVC guarantees identical results across environments by version-controlling:
+- Data  
+- Models  
+- Parameters  
+- Pipeline stages  
+
+### ✔ 📈 **Experimentation**  
+MLflow tracks:
+- Metrics  
+- Hyperparameters  
+- Artifacts  
+- Models  
+
+➡️ Makes it easy to compare hundreds of experiments.
+
+### ✔ 🤝 **Collaboration**  
+DVC + MLflow + Git + DagsHub create a full cloud-ready MLOps stack.
+
+### ✔ 🎓 **Research & Team Use**
+Ideal for:
+- Research workflows  
+- Academic ML projects  
+- DS team collaboration  
+- MLOps learning & demos  
+
+> 🟡 **Colorized Callout:**  
+> This pipeline is built for real-world ML engineering — not just toy scripts.
+
+---
+
+<!-- ============================================== -->
+<!--                  TECH STACK                    -->
+<!-- ============================================== -->
+
+<h2 align="center">🛠 Tech Stack</h2>
+
+| Icon | Technology | Purpose |
+|------|------------|---------|
+| 🐍 | Python | Main programming language |
+| 🔢 | Scikit-learn | Model training & evaluation |
+| 📦 | DVC | Data & model versioning |
+| 📘 | MLflow | Experiment tracking |
+| ☁️ | DagsHub | Remote storage + MLflow UI |
+| 🐙 | Git | Code versioning |
+
+---
+
+<!-- ============================================== -->
+<!--            DVC PIPELINE STAGE CREATION         -->
+<!-- ============================================== -->
+
+<h2 align="center">🧩 DVC Pipeline Stage Creation (Reference)</h2>
+
+```bash
+# 🧹 Preprocessing Stage
+dvc stage add -n preprocess \
+    -p preprocess.input,preprocess.output \
+    -d src/preprocess.py -d data/raw/data.csv \
+    -o data/processed/data.csv \
+    python src/preprocess.py
+
+# 🤖 Training Stage
+dvc stage add -n train \
+    -p train.data,train.model,train.random_state,train.n_estimators,train.max_depth \
+    -d src/train.py -d data/raw/data.csv \
+    -o models/model.pkl \
+    python src/train.py
+
+# 📊 Evaluation Stage
+dvc stage add -n evaluate \
+    -d src/evaluate.py -d models/model.pkl -d data/raw/data.csv \
+    python src/evaluate.py
