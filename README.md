@@ -158,10 +158,8 @@ dvc stage add -n evaluate \
     python src/evaluate.py
 ```
 
-<!-- ============================================== -->
-<!--                                -->
-<!-- ============================================== -->
+---
 
-<h2 align="center">🤝 Contributing </h2>
+<h2>🤝 Contributing </h2>
 
 Feel free to open issues or submit pull requests—contributions are greatly appreciated!
