@@ -43,9 +43,6 @@ It trains a <b>🌲 Random Forest Classifier</b> on the
 - Cleans, formats & structures data
 - Produces fully reproducible processed data
 
-> 🔵 **Colorized Callout:**  
-> *Consistent preprocessing ensures that model results are always reproducible — no “it worked on my machine” issues.*
-
 ---
 
 <h2 align="center">🔹 🤖 Training Stage 🔹</h2>
@@ -64,9 +61,6 @@ It trains a <b>🌲 Random Forest Classifier</b> on the
   - 📊 Confusion Matrix  
   - 🧾 Classification Report  
   - 📦 Trained Model Artifact  
-
-> 🟢 **Colorized Callout:**  
-> MLflow makes every experiment comparable. No more spreadsheets, screenshots, or forgotten parameters.
 
 ---
 
@@ -117,9 +111,6 @@ Ideal for:
 - Academic ML projects  
 - DS team collaboration  
 - MLOps learning & demos  
-
-> 🟡 **Colorized Callout:**  
-> This pipeline is built for real-world ML engineering — not just toy scripts.
 
 ---
 
