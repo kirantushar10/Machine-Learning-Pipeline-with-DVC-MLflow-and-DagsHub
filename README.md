@@ -19,120 +19,36 @@
 
 ## 📝 Project Summary
 
-This project delivers a fully modular and reproducible  
-**⚙️ Machine Learning Pipeline** powered by **DVC**, **MLflow**, and **DagsHub**,  
-designed to train a **🌲 Random Forest Classifier** on the  
-**🩺 Pima Indians Diabetes Dataset**.
+This project implements a fully reproducible **⚙️ Machine Learning Pipeline** using  
+**📦 DVC**, **📘 MLflow**, **☁️ DagsHub**, and **🐍 Python** to train a  
+**🌲 Random Forest Classifier** on the **🩺 Pima Indians Diabetes dataset**.
 
-The pipeline consists of **three core stages**, each visually represented below:
+It follows a real MLOps workflow with clearly separated, version-controlled stages:
 
-📥 RAW DATA
+---
+
+# 📐 Pipeline Architecture (ASCII Graphic)
+
+┌─────────────────────────────────────────────────────┐
+│ 📥 RAW DATA │
+└───────────────▲─────────────────────────────────────┘
 │
-▼
-🧹 PREPROCESSING ──► 📄 CLEAN DATA
+│ 1️⃣ Preprocessing (DVC Stage)
 │
-▼
-🤖 TRAINING ──► 🎯 TRAINED MODEL
+┌───────────────┴─────────────────────────────────────┐
+│ 🧹 CLEAN / PROCESSED DATA │
+└───────────────▲─────────────────────────────────────┘
 │
-▼
-📊 EVALUATION ──► 📈 METRICS + REPORTS (MLflow)
-
----
-
-### 🔹 **🧹 Preprocessing**  
-`preprocess.py`  
-- Loads raw dataset  
-- Applies cleaning & formatting  
-- Saves consistent output to `data/processed/`  
-- Ensures every run uses identical processed data  
-
-✔ Powered by: **DVC Data Versioning**  
-✔ Output: `data/processed/data.csv`  
-
----
-
-### 🔹 **🤖 Training**  
-`train.py`  
-- Trains Random Forest model with Grid Search  
-- Logs everything to MLflow:  
-  - 📈 Accuracy  
-  - ⚙️ Hyperparameters (`n_estimators`, `max_depth`, etc.)  
-  - 📊 Confusion Matrix  
-  - 🧾 Classification Report  
-  - 📦 Trained Model Artifact  
-
-✔ Model versioned with **DVC**  
-✔ Metrics + Params tracked via **MLflow**  
-
----
-
-### 🔹 **📊 Evaluation**  
-`evaluate.py`  
-- Loads trained model  
-- Evaluates accuracy on test data  
-- Logs final performance metrics & reports to MLflow  
-
-✔ Enables easy experiment comparison  
-✔ Fully reproducible evaluation  
-
----
-
-## 🎯 Why This Pipeline?
-
-### ✔ **Reproducibility**  
-📦 **DVC** ensures any change in data/code/parameters reruns only the necessary stages — guaranteeing identical results across environments.
-
-### ✔ **Experimentation**  
-📘 **MLflow** makes it effortless to compare:  
-- Runs  
-- Hyperparameters  
-- Metrics  
-- Models  
-
-### ✔ **Collaboration**  
-☁️ **DagsHub** + Git + DVC + MLflow =  
-A complete cloud-hosted collaborative MLOps workspace.
-
-### ✔ **Research & Team Use**  
-Ideal for:  
-- ML research workflows  
-- Data science teams  
-- Reproducible MLOps education  
-- Model lifecycle management  
-
----
-
-## 🛠 Tech Stack
-
-| Icon | Tool | Purpose |
-|------|------|---------|
-| 🐍 | Python | Core ML logic |
-| 📦 | DVC | Dataset & model versioning |
-| 📘 | MLflow | Experiment tracking |
-| ☁️ | DagsHub | Remote DVC + MLflow hosting |
-| 🌲 | RandomForest | Machine learning model |
-| 🔢 | Scikit-learn | ML algorithms & evaluation |
-
----
-
-## 🧩 DVC Pipeline Stage Creation (Reference)
-
-```bash
-# Preprocessing Stage
-dvc stage add -n preprocess \
-    -p preprocess.input,preprocess.output \
-    -d src/preprocess.py -d data/raw/data.csv \
-    -o data/processed/data.csv \
-    python src/preprocess.py
-
-# Training Stage
-dvc stage add -n train \
-    -p train.data,train.model,train.random_state,train.n_estimators,train.max_depth \
-    -d src/train.py -d data/raw/data.csv \
-    -o models/model.pkl \
-    python src/train.py
-
-# Evaluation Stage
-dvc stage add -n evaluate \
-    -d src/evaluate.py -d models/model.pkl -d data/raw/data.csv \
-    python src/evaluate.py
+│ 2️⃣ Training (MLflow + DVC Stage)
+│
+┌───────────────┴─────────────────────────────────────┐
+│ 🤖 TRAINED MODEL │
+│ (versioned using DVC, logged using MLflow) │
+└───────────────▲─────────────────────────────────────┘
+│
+│ 3️⃣ Evaluation (MLflow Stage)
+│
+┌───────────────┴─────────────────────────────────────┐
+│ 📊 METRICS & REPORTS │
+│ (Accuracy, Confusion Matrix, Classification Report) │
+└──────────────────────────────────────────────────────┘
